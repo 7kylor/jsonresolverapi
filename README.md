@@ -1,5 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
+ 
 ## Getting Started
 
 First, run the development server:
@@ -15,22 +14,34 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ 
+Put your open ai key in: src/app/lib/openai.ts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+# JSON Resolver API
+This is a Next.js project that provides an API endpoint for converting unstructured data into a specified JSON format.
 
-To learn more about Next.js, take a look at the following resources:
+# API Usage
+The API endpoint is a POST request that accepts a JSON body with two properties: data and format.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+data is a string of unstructured data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+format is an object that describes the desired output JSON structure.
 
-## Deploy on Vercel
+Here is an example of how to use the API with Postman:
+ 
+POST http://localhost:3000/api/json
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ {
+    "data": "the test is name ahmed",
+    "format": {
+        "name": {
+            "type": "number"
+        }
+    }
+}
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+In this example, the data is "the test is name ahmed", and the format specifies that the output JSON should have a name property of type number.
+
+The API will attempt to parse the data and convert it into the specified format. If successful, it will return a JSON response with the parsed data. If it encounters an error, it will return an error message.
